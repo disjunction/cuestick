@@ -1,6 +1,4 @@
 const Ball = require('./Ball');
-const R = require('ramda');
-const co = require('co');
 
 class CueBall extends Ball {
   addBall(ball) {
@@ -11,7 +9,7 @@ class CueBall extends Ball {
       ball = require(ball);
     }
     if (typeof ball === 'function') {
-      ball = new ball(this.app);
+      ball = new ball(this.app); // eslint-disable-line
     }
     this.app.context.balls.push(ball);
     return this;
