@@ -25,20 +25,15 @@ class CueBall extends Ball {
 
   bump() {
     this.validateBump();
-    const bumps = this.app.context.balls.map(ball => {
-      return ball.bump.bind(ball);
-    });
-    return bumps
+    const balls = this.app.context.balls;
+    return balls
       .reduce(
-        (previous, current) => previous.then(current),
+        (acc, current) => acc.then(() => current.bump()),
         Promise.resolve()
       )
-      .then(() => {
-        // theoretically bumps, might have created more balls,
-        // that's why we want to reiterate before we roll
-        const rolls = this.app.context.balls.map(ball => ball.roll());
-        return Promise.all(rolls);
-      });
+      .then(
+        () => Promise.all(balls.map(ball => ball.roll()))
+      );
   }
 }
 
