@@ -1,18 +1,13 @@
+const helper = require('./helper');
 class Service {
   constructor(app, opts) {
+    helper.normalizeApp(app);
     this.app = app;
-
-    // if it's express, then create context
-    // as if it were koa
-    if (!this.app.context) {
-      this.app.context = {};
-    }
-
     this.opts = opts || {};
   }
 
   get name() {
-    return this.opts.name || this.constructor.name;
+    return this.opts.name || helper.lcfirst(this.constructor.name);
   }
 }
 

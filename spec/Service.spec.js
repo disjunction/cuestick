@@ -6,8 +6,13 @@ const app = koa();
 class TestService extends Service{}
 
 describe('Service', () => {
-  const testService = new TestService(app);
-  it('name returns the child name', () => {
-    expect(testService.name).toBe('TestService');
+  it('.name returns the constructor name', () => {
+    const testService = new TestService(app);
+    expect(testService.name).toBe('testService');
+  });
+
+  it('.name returns the opt.name', () => {
+    const s = new Service(app, {name: 'John'});
+    expect(s.name).toBe('John');
   });
 });

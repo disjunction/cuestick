@@ -1,12 +1,16 @@
-const CueService = require('./CueService');
+const CueBumper = require('./CueBumper');
 
-function factory(app) {
-  return new CueService(app);
+function cuestickFactory(app) {
+  return new CueBumper(app);
 }
 
-Object.assign(factory, {
-  Service: require('./Service'),
-  CueService: CueService
-});
+Object.assign(
+  cuestickFactory,
+  {
+    Service: require('./Service'),
+    CueBumper: CueBumper
+  },
+  require('./helper')
+);
 
-module.exports = factory;
+module.exports = cuestickFactory;

@@ -16,6 +16,8 @@
     "timeout-as-promise": "^1.0.0"
   },
   "dependencies": {
+    "coveralls": "^2.11.14",
+    "istanbul": "^0.4.5",
     "ramda": "^0.22.1"
   }
 }
